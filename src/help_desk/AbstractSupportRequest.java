@@ -1,6 +1,6 @@
 package help_desk;
 
-public abstract class AbstractSupportRequest {
+public abstract class AbstractSupportRequest implements SupportRequest {
 	private final int id;
 	private final String title;
 	private final int basePoints;
@@ -21,26 +21,39 @@ public abstract class AbstractSupportRequest {
 		this.basePoints = basePoints;
 		this.resolved = false;
 	}
-	
+	@Override
 	public int getId() {
 		return id;
 	}
+	@Override
 	public String getTitle() {
 		return title;
 	}
+	@Override
 	public int getBasePoints() {
 		return basePoints;
 	}
+	
+	@Override
 	public boolean isResolved() {
 		return resolved;
 	}
 	
-	public void resolve() {
-		if(this.resolved) {
-			throw new IllegalStateException("Resolution faild: Request with ID" + id + "Is already resolved.");
+	@Override
+	public final int resolveFor(Technician technician) {
+		if (technician == null) {
+			throw new IllegalArgumentException("Technician cannot be null.");
 		}
+		if (this.resolved) {
+			throw new IllegalStateException("Resolution failed: Request with ID " + id + " is already resolved.");
+		}
+		int points = calculatePoints();
 		this.resolved = true;
+		technician.addServicePoints(points);
+		return points;
 	}
+	
+	protected abstract int calculatePoints();
 	
 	@Override
 	
