@@ -49,7 +49,7 @@ public abstract class AbstractSupportRequest implements SupportRequest {
 		}
 		int points = calculatePoints();
 		this.resolved = true;
-		technician.addServicePoints(points);
+		technician.addPoints(points);
 		return points;
 	}
 	
