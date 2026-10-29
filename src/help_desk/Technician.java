@@ -1,7 +1,7 @@
 package help_desk;
 
 public class Technician {
-	private String name;
+	private final String name;
 	private int servicePoints;
 	
 	public Technician(String name) {

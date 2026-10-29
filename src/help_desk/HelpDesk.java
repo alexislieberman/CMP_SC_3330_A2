@@ -2,10 +2,12 @@ package help_desk;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
 public class HelpDesk {
 	private final Map<Integer, SupportRequest> requestsByID = new HashMap<>();
 	private final Map<Technician, List<SupportRequest>> assignments = new HashMap<>();
+	
 	
 	public void addRequest(SupportRequest request) {
 		int id = request.getId();
@@ -23,17 +25,28 @@ public class HelpDesk {
 	
 	
 	public void assignRequest(Technician technician, int requestID) {
-		List<SupportRequest> techRequests = assignments.get(technician);
 		SupportRequest newRequest = findRequest(requestID);
+		if (newRequest == null)
+			throw new IllegalArgumentException("Request does not exist.");
 		
-		//cannot assign same request to the same technician more than once
-		if (techRequests.contains(newRequest)){
-			throw new IllegalArgumentException("Request already assigned to this technician. Cannot double-assign");
+		
+		if (!(assignments.containsKey(technician))) {
+			List<SupportRequest> newList = new ArrayList<>();
+			newList.add(newRequest);
+			assignments.put(technician, new ArrayList<>());
+		}
+		else {
+			List<SupportRequest> techRequests = assignments.get(technician);
+			
+			//cannot assign same request to the same technician more than once
+			if (techRequests.contains(newRequest)){
+				throw new IllegalArgumentException("Request cannot be assigned to the same technician more than once.");
+			}
+			techRequests.add(newRequest);
 		}
 		
-		//can now safely add
-		techRequests.add(newRequest);
 	}
+	
 	
 	
 	public int resolveRequest(Technician technician, int requestID) {

@@ -21,14 +21,20 @@ public abstract class AbstractSupportRequest implements SupportRequest {
 		this.basePoints = basePoints;
 		this.resolved = false;
 	}
+	
+	
 	@Override
 	public int getId() {
 		return id;
 	}
+	
+	
 	@Override
 	public String getTitle() {
 		return title;
 	}
+	
+	
 	@Override
 	public int getBasePoints() {
 		return basePoints;
@@ -38,6 +44,7 @@ public abstract class AbstractSupportRequest implements SupportRequest {
 	public boolean isResolved() {
 		return resolved;
 	}
+	
 	
 	@Override
 	public final int resolveFor(Technician technician) {
@@ -53,12 +60,12 @@ public abstract class AbstractSupportRequest implements SupportRequest {
 		return points;
 	}
 	
+	
 	protected abstract int calculatePoints();
 	
 	@Override
-	
 	public String toString() {
-		return String.format("%s [ID= %d, Title=%s,BasePoints=%d,Status=%s]",
+		return String.format("%s [ID: %d, Title: %s, BasePoints: %d, Status: %s]",
 			this.getClass().getSimpleName(),
 			id,title,basePoints,resolved ? "RESOLVED": "OPEN"
 				);
