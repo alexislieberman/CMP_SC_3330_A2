@@ -8,7 +8,6 @@ public class Technician {
 		if(name==null || name.length() == 0)
 			throw new IllegalArgumentException("Name must be defined.");
 		
-		
 		this.name = name;
 		this.servicePoints = 0;
 	} 
@@ -26,7 +25,7 @@ public class Technician {
 		return servicePoints;
 	}
 	
-	//overriding equals and hach code to just be for name
+	//overriding equals and hash code to just be for name
 	@Override 
 	public boolean equals(Object o) {
 		if(this == o)
