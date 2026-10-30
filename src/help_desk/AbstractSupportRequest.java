@@ -11,7 +11,7 @@ public abstract class AbstractSupportRequest implements SupportRequest {
 			throw new IllegalArgumentException("ID must be greater than 0. ID: " + id);	
 		}
 		if (title == null|| title.strip().isEmpty()) {
-			throw new IllegalArgumentException("Title cann be null, empty, or blank.");
+			throw new IllegalArgumentException("Title cannot be null, empty, or blank.");
 		}
 		if (basePoints <= 0) {
 			throw new IllegalArgumentException("Base Points must be greater than 0. Basepoint:" + basePoints);

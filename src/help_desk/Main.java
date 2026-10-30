@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
-		
 	
 		Technician joe = new Technician("Joe");
 		Technician kyle = new Technician("Kyle");
@@ -46,9 +45,13 @@ public class Main {
 		System.out.println("\n\nPrinting all requests for evan:");
 		helpDesk.printAssignmentsFor(evan2);
 		
-		System.out.println("\nJoe has " + joe.getServicePoints() + " points");
-		System.out.println("Kyle has " + kyle.getServicePoints() + " points");
-		System.out.println("Evan has " + evan1.getServicePoints() + " points ");
+		System.out.println("\n\nPrinting all requests for joe:");
+		helpDesk.printAssignmentsFor(joe);
+		
+		System.out.println("\n\nService Points per Technician:");
+		System.out.println(joe.toString());
+		System.out.println(kyle.toString());
+		System.out.println(evan1.toString());
 		
 		List<Technician> allTechs = new ArrayList<>();
 		allTechs.add(joe);
@@ -57,7 +60,7 @@ public class Main {
 		allTechs.add(evan2);
 		
 		int totalPoints = HelpDeskUtil.sumPoints(allTechs);
-		System.out.println("Total Points: " + totalPoints);
+		System.out.println("\nTotal Points: " + totalPoints);
 		
 		
 		//fail-fast:

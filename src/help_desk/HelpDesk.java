@@ -30,19 +30,20 @@ public class HelpDesk {
 			throw new IllegalArgumentException("Request does not exist.");
 		
 		
-		if (!(assignments.containsKey(technician))) {
-			List<SupportRequest> newList = new ArrayList<>();
-			newList.add(newRequest);
-			assignments.put(technician, new ArrayList<>());
-		}
-		else {
+		if (assignments.containsKey(technician)) {
 			List<SupportRequest> techRequests = assignments.get(technician);
 			
 			//cannot assign same request to the same technician more than once
-			if (techRequests.contains(newRequest)){
+			if (techRequests.contains(newRequest))
 				throw new IllegalArgumentException("Request cannot be assigned to the same technician more than once.");
-			}
+			
 			techRequests.add(newRequest);
+		}
+		
+		else {
+			List<SupportRequest> newList = new ArrayList<>();
+			newList.add(newRequest);
+			assignments.put(technician, newList);
 		}
 		
 	}
